@@ -11,7 +11,12 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 BUCKET_NAME = "bhushan-secure-cloud-2025"
 BLOCK_SIZE = 1024 * 1024  # 1 MB
 
-s3 = boto3.client("s3")
+s3 = boto3.client(
+    "s3",
+    aws_access_key_id=st.secrets["aws"]["access_key_id"],
+    aws_secret_access_key=st.secrets["aws"]["secret_access_key"],
+    region_name=st.secrets["aws"]["region"]
+)
 
 
 def encrypt_file(file_data):
